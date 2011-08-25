@@ -22,7 +22,7 @@ def collectComments(files, sourceType, symbol ):
     return cat
 
 
-def _extract(cat, multiLinePattern, singleLineComment, source, symbol):
+def _extract(cat, multiLinePattern, singleLinePattern, source, symbol):
     i = 0
     fileContents = file(source).read()
     multiLineComments = re.findall(multiLinePattern, fileContents, re.S)
@@ -35,24 +35,26 @@ def _extract(cat, multiLinePattern, singleLineComment, source, symbol):
     # Still trying to figure out how to do this with a regex and get a line number
     for line in fileinput.FileInput(source):
         i += 1
-        if singleLineComment in line:
-            matched = re.findall('(' + symbol + '\w+)', line);
+        m = re.search(singleLinePattern, line);
+        if m:
+            lineComment = m.group(1)
+            matched = re.findall('(' + symbol + '\w+)', lineComment);
             for match in matched:
-                cat[match].append(source + ':' + str(i) + ' -> ' + line.strip())
+                cat[match].append(source + ':' + str(i) + ' -> ' + lineComment)
 
 
 def extractCStyleComments(source, symbol, cat):
-    singleLineComment = '//'
+    singleLinePattern = '.*?(//.*)'
     multiLinePattern = '(/\*(.*?)\*/)'
 
-    _extract(cat, multiLinePattern, singleLineComment, source, symbol)
+    _extract(cat, multiLinePattern, singleLinePattern, source, symbol)
 
 
 def extractPythonComments(source, symbol, cat):
-    singleLineComment = '#'
+    singleLinePattern = '.*?(#.*)'
     multiLinePattern = '("""(.*?)""")'
 
-    _extract(cat, multiLinePattern, singleLineComment, source, symbol)
+    _extract(cat, multiLinePattern, singleLinePattern, source, symbol)
 
 extracters = {
     'js': extractCStyleComments,
@@ -70,6 +72,9 @@ languageSuffixes = {
 Testing multiline comments !r1
 """
 # Main Script
+
+
+
 
 import argparse
 
@@ -90,7 +95,7 @@ files = []
 for d in args.dirs:
     files.extend(listFiles(d, languageSuffixes[args.language]))
 
-print files
+
 categories = collectComments(files, args.language, args.symbol)
 
 print '\n\nMatches\n=======\n\n'
@@ -99,3 +104,5 @@ for k, v in categories.iteritems():
     print k, '\n\t', '\n\t'.join(v)
     print '\n\n'
     
+
+

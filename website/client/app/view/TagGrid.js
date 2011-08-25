@@ -8,9 +8,7 @@
 Ext.define('Bang.view.TagGrid', {
     extend: 'Ext.grid.Panel',
     title: 'Tags',
-    id: 'myFormsPanel',
-
-
+    alias: 'widget.tagGrid',
 
 
     initComponent: function () {
@@ -18,127 +16,74 @@ Ext.define('Bang.view.TagGrid', {
         this.columns = [
             {
                 //id: 'title', // id assigned so we can apply custom css (e.g. .x-grid-col-topic b { color:#333 })
-                header: "Form Name",
-                dataIndex: 'title',
+                header: "Comment",
+                dataIndex: 'comment',
                 sortable: true,
-                flex: 1
+                flex: 1,
+                renderer: function (value, meta, record) {
+                    return "<div class='tagColumn'>&nbsp;" + value + "</div>";
+                }
 
             },
             {
-                header: 'Creation Date',
-                dataIndex: 'dateCreated',
+                header: 'File',
+                dataIndex: 'file',
+                flex: .5,
+                renderer: function (value, meta, record) {
+                    return "<div class='fileColumn'>&nbsp;" + value + "</div>";
+                }
+
+
+            },
+            {
+                header: "Line Number",
+                dataIndex: 'lineNumber',
                 sortable: true,
-                hidden: true
-            },
-            {
-                header: 'Last Access',
-                dataIndex: 'dateLastAccessed',
-                hidden: true,
-                sortable: true
-            },
-            {
-                header: 'Fill Form',
-                align: 'center',
-                dataIndex: 'fillForm',
-                sortable: false,
                 renderer: function (value, meta, record) {
-                    if (record.get('url')) {
-                        return '';
-                    }
-                    else {
-                        return "<div class='fillinFormRow'>&nbsp;" + value + "</div>";
-                    }
+                    return "<div class='lineColumn'>&nbsp;" + value + "</div>";
                 }
-            },
-            {
-                header: 'Form Approvals',
-                align: 'center',
-                dataIndex: 'formApprovals',
-                sortable: false,
-                renderer: function (value, meta, record) {
-                    if (record.get('url')) {
-                        return '';
-                    }
-                    else {
-                        return "<div class='formApprovalsRow'>&nbsp;" + value + "</div>";
-                    }
-                }
+
 
             },
             {
-                header: 'View',
-                align: 'center',
-                dataIndex: 'totalViewed',
-                sortable: false,
+                header: "Priority",
+                dataIndex: 'priority',
+                sortable: true,
                 renderer: function (value, meta, record) {
-                    var cls = "viewAllRow";
-                    if (record.data.url) {
-                        cls = 'go2CustomPage';
-                        value = "";
+                    var cls = 'noPriorityColumn';
+                    if (value && value >= 0) {
+                        cls = 'lowPriorityColumn';
                     }
-                    return "<div class='" + cls + "'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + value + "</div> ";
+                    if (value && value >= 4) {
+                        cls = 'mediumPriorityColumn';
+                    }
+                    if (value && value >= 7) {
+                        cls = 'highPriorityColumn';
+                    }
+                    return "<div class='" + cls + "'>&nbsp;" + value + "</div>";
                 }
             },
-            {
-                header: 'Design',
-                align: 'center',
-                dataIndex: 'design',
-                sortable: false,
-                renderer: function (value, meta, record) {
-                    if (record.get('url')) {
-                        return '';
-                    }
-                    else {
-                        return "<div class='designRow'>&nbsp;" + value + "</div>";
-                    }
-                }
-
-            },
-            {
-                header: 'Clear',
-                dataIndex: 'clear',
-                align: 'center',
-                sortable: false,
-                renderer: function (value, meta, record) {
-                    if (record.get('url')) {
-                        return '';
-                    }
-                    else {
-                        return "<div class='clearFormRow'>&nbsp;" + value + "</div>";
-                    }
-                }
-            },
-            {
-                header: 'Delete',
-                dataIndex: 'delete',
-                align: 'center',
-                sortable: false,
-                renderer: function (value, meta, record) {
-                    if (record.get('url')) {
-                        return '';
-                    }
-                    else {
-                        return "<div class='deleteFormRow'>&nbsp;" + value + "</div>";
-                    }
-                }
-
-            }
         ];
 
-        this.store = Ext.create('Ext.data.Store', {
-            pageSize: 100,
-            model: 'FormHog.model.MyForms',
-            autoLoad: true,
-            proxy: {
+        this.store = Ext.create('Ext.data.ArrayStore', {
+            // store configs
+            autoDestroy: true,
+            storeId: 'myStore',
+            // reader configs
+            idIndex: 0,
+            fields: [
+                'comment','file','lineNumber','priority'
+            ],
+            data:
+                [
+                    ['#Fix the height to be the width of the screen','client/app/RoleGrid.js','126','7'],
+                    ['#TODO: Fix this to use inheritance #ui #charliedoesntknowextFix the height to be the width of the screen','client/app/view/formdesigner/DesignerPanel.js','7','4'],
+                    ['#Change screens when a template is active #soon #uiFix the height to be the width of the screen','client/app/view/formfiller/FormEditorPanel.js','56','2'],
+                    ['#This isnt used yet, the fields are in place','client/app/view/admin/NewUserDialog.js','1230', undefined],
+                    ['#The honey badger doesnt give a shit','client/app/view/admin/NewUserDialog.js','100', 7],
+                    ['#Oh no you did not do this brad','client/app/view/admin/EdUserDialog.js','45', 1],
 
-                type: 'jsonp',
-                url: '/formhogapi/form/getMyFormsInfo',
-                reader: {
-                    root: 'data',
-                    totalProperty: 'total'
-                }
-            }
-
+                ]
         });
 
         this.callParent(arguments);

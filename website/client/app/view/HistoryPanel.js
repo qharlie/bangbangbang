@@ -20,7 +20,14 @@ Ext.define('Bang.view.HistoryPanel', {
     bodyMargin: "5 5 5 5",
     items:
         [
-            { xtype: 'button', text: '21 days ago' , height: 30, width: 170, margin: "5 5 5 5"},
-            { xtype: 'button', text: '5 days ago' , height: 30, width: 170, margin: "5 5 5 5"}
+            {
+                html: '<div class="menuPanel"><img src="resources/images/clock.png" alt=""> <a href="#">10 days ago</a><hr style="height: 1px;"/>' +
+                    '<img src="resources/images/clock.png" alt=""> <a href="#">7 days ago</a><hr style="height: 1px;"/>' +
+                    '<img src="resources/images/clock.png" alt=""> <a href="#">2 days ago</a><hr style="height: 1px;"/>' +
+                    '<img src="resources/images/clock.png" alt=""> <a href="#">3 hours ago</a><hr style="height: 1px;"/>' +
+                    '<img src="resources/images/clock.png" alt=""> <a href="#">5 minutes ago</a><hr style="height: 1px;"/>' +
+                    '</div>', border: false
+            }
+
         ]
 });

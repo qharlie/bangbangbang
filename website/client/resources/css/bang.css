@@ -1,0 +1,76 @@
+.logo {
+    float: left;
+    margin-left: .4em;
+    margin-top: .3em;
+
+}
+
+.tagColumn {
+    font-family: helvetica;
+    font-size: 1.3em;
+    color: #000066;
+}
+
+.fileColumn {
+    font-family: helvetica;
+    font-size: 1.3em;
+    color: #540054;
+}
+
+.lineColumn {
+    font-family: helvetica;
+    font-size: 1.3em;
+
+}
+
+.noPriorityColumn {
+
+    text-align: center;
+    font-family: helvetica;
+    font-size: 1.3em;
+}
+
+.lowPriorityColumn {
+    color: white;
+    text-align: center;
+    background-color: #6f6fe4;
+    font-family: helvetica;
+    font-size: 1.3em;
+}
+
+.mediumPriorityColumn {
+    color: white;
+    text-align: center;
+    background-color: #ff8800;
+    font-family: helvetica;
+    font-size: 1.3em;
+
+}
+
+.highPriorityColumn {
+    color: white;
+    text-align: center;
+    background-color: #ff0000;
+    font-family: helvetica;
+    font-size: 1.3em;
+
+}
+
+.menuPanel {
+    font-family: helvetica;
+    margin: 1em;
+    font-size: 1.4em;
+}
+
+A:link {
+
+    text-decoration: none;
+    color: #660066;
+
+}
+
+A:hover {
+
+    text-decoration: underline;
+    color: red;
+}

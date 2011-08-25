@@ -2,13 +2,15 @@ Ext.define('Bang.view.Viewport', {
     extend: 'Ext.container.Viewport',
     layout: 'border',
     renderTo: 'bang-div',
+    id: 'viewport',
 
 
     requires: [
         'Bang.view.TagGrid',
         'Bang.view.TagPanel',
         'Bang.view.HistoryPanel',
-        'Bang.view.North'
+        'Bang.view.North',
+        'Bang.view.AceDialog'
 
     ],
 
@@ -24,6 +26,8 @@ Ext.define('Bang.view.Viewport', {
             this.north
 
         ];
+
+        
         this.callParent(arguments);
     }
 });

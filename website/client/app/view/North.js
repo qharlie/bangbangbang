@@ -17,5 +17,10 @@ Ext.define("Bang.view.North", {
     preventHeader: true,
     layout: 'hbox',
 
-    html: '<p align="center">BANG!</p>'
+    html:
+        '<img src="resources/images/logo.png" alt="" style="margin-top: .2em;">' +
+            '<span align="center" style="font-family: Courier;font-size: 2em;font-weight: bold;">BANG.' +
+            ' <span style="font-size: .5em;font-weight: normal;"> quick ticketing for lazy programmers' +
+            '</span>' +
+            '</span>'
 });

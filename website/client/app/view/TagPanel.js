@@ -9,31 +9,44 @@ Ext.define('Bang.view.TagPanel', {
     region: 'center',
     collapsible: true,
     split: true,
-    bodyMargin: "5 5 5 5",
     layout:'accordion',
-    defaults: {
-        // applied to each contained panel
-        bodyStyle: 'padding:15px'
-    },
+    height: 100,
 
     initComponent: function () {
 
         this.items = [
             {
-                title: '<span style="font-family: Verdana;font-size: 1.5em;">R1</span>',
-                html: 'Panel content!'
-            },
-            {
-                title: '<span style="font-family: Verdana;font-size: 1.5em;">mustfix</span>',
-                html: 'Panel content!'
-            },
-            {
-                title: '<span style="font-family: Verdana;font-size: 1.5em;">eventually</span>',
-                html: 'Panel content!'
-            }
-        ],
+                title: '<img src="resources/images/tag.png" alt=""> <span style="font-family: Courier;font-size: 1.2em;font-weight: bold;">r1</span>',
+                xtype: 'tagGrid',
 
-            this.callParent();
-    }
+            },
+            {
+                title: '<img src="resources/images/tag.png" alt=""> <span style="font-family: Courier;font-size: 1.2em;font-weight: bold;">mustfix</span>',
+                xtype: 'tagGrid'
+            },
+            {
+                title: '<img src="resources/images/tag.png" alt=""> <span style="font-family: Courier;font-size: 1.2em;font-weight: bold;">eventually</span>',
+                xtype: 'tagGrid'
+            },
+            {
+                title: '<img src="resources/images/tag.png" alt=""> <span style="font-family: Courier;font-size: 1.2em;font-weight: bold;">soon</span>',
+                xtype: 'tagGrid'
+            }
+            ,
+            {
+                title: '<img src="resources/images/tag.png" alt=""> <span style="font-family: Courier;font-size: 1.2em;font-weight: bold;">charliedoesntknowext</span>',
+                xtype: 'tagGrid'
+            }
+        ];
+
+        this.callParent(arguments);
+    },
+
+    beforeShow: function () {
+
+        alert('here');
+        this.items.itemAt(2).expand();
+        this.callParent(arguments);
+    },
 
 });
