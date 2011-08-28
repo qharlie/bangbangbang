@@ -4,7 +4,7 @@ import os, fileinput, re, collections, sys
 from pythonExtractor import PythonExtractor
 from cExtractor import CstyleExtractor
 
-# Have someone who knows pythong rewrite this !r1
+# Have someone who knows pythong rewrite this !r1 ^8
 
 
 def listFiles(rootDir, suffixes):
@@ -44,13 +44,7 @@ defaultSymbols = {
 
 # Main Script
 
-# Create a .bang file that has project info, login info, symbol info etc !r2
-
-
-#m = re.search('\^(\d)','#foo ^1');
-#print m.group(1)
-#
-#sys.exit(0)
+# Create a .bang file that has project info, login info, symbol info etc !r2 ^5
 
 import argparse
 
@@ -88,10 +82,11 @@ if args.text:
 
     for k, v in categories.iteritems():
         print k, '\n\t'
-        for tag in v:
+        tagList = sorted(v, key=lambda v: v.priority, reverse=True)
+        for tag in tagList:
             print '\t' + str(tag)
         print '\n\n'
     
 else:
     pass
-    # upload results and return a url !r1
+    # upload results and return a url !r1 ^9

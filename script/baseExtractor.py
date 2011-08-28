@@ -31,7 +31,11 @@ class Extractor:
                 comment = m.group(1)
                 matched = re.findall('(' + self.symbol + '\w+)', comment);
                 for match in matched:
-                    self.cat[match].append(tag.Tag( source, i, match, comment, fileContents))
+                    priority = 0
+                    priorityMatch = re.search(self.priorityPattern,comment);
+                    if priorityMatch:
+                        priority = priorityMatch.group(1)
+                    self.cat[match].append(tag.Tag( source, i, match, comment, fileContents, priority))
 
 
 
