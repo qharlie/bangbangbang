@@ -1,0 +1,1 @@
+$.ender({ Class: Class });

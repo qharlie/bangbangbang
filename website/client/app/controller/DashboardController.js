@@ -13,7 +13,7 @@ Ext.define('Bang.controller.DashboardController', {
             'viewport tagGrid':
             {
                 itemdblclick: function (view, record, item, rowIndex, e) {
-                    alert('clicky!');
+                   
                 }
             },
         });

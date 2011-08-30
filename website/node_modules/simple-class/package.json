@@ -1,0 +1,13 @@
+{
+  "name": "simple-class",
+  "description": "John Resig's simple inheritance class",
+  "version": "1.0.0",
+  "homepage": "https://github.com/jgallen23/simple-class",
+  "authors": ["Greg Allen, @jgallen23"],
+  "repository": {
+    "type": "git",
+    "url": "https://jgallen23@github.com/jgallen23/simple-class.git"
+  },
+  "main": "./class.js",
+  "ender": "./ender.js"
+}

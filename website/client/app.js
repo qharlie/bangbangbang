@@ -6,8 +6,20 @@ Ext.create('Ext.app.Application', {
 
     controllers: [
         'DashboardController',
-    ]
+    ],
+
+    launch: function () {
+        
+        var parms = Ext.Object.fromQueryString(location.search);
 
 
-   
+        if ( parms['reportId'])
+        {
+            BangAPI.setCache('reportId', parms['reportId']);
+        }
+
+    }
+
+
+
 })

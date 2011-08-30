@@ -1,8 +1,9 @@
 #!/usr/bin/python
 
-import os, fileinput, re, collections, sys
+import os, fileinput, re, collections, sys, json
 from pythonExtractor import PythonExtractor
 from cExtractor import CstyleExtractor
+from tag import Tag
 
 # Have someone who knows pythong rewrite this !r1 ^8
 
@@ -19,6 +20,7 @@ def listFiles(rootDir, suffixes):
 
 extracters = {
     'js': CstyleExtractor,
+    'java': CstyleExtractor,
     'c': CstyleExtractor,
     'c++': CstyleExtractor,
     'c#': CstyleExtractor,
@@ -28,6 +30,7 @@ extracters = {
 languageSuffixes = {
 
     'python': ['py'],
+    'java': ['java'],
     'py': ['py'],
     'js': ['js'],
     'c' : ['c', 'h'],
@@ -37,7 +40,8 @@ languageSuffixes = {
 defaultSymbols = {
     'python' : '!',
     'py' : '!',
-    'js' : '#',
+    'java' : '!',
+    'js' : '!',
     'c' : '##',
     'cpp' : '##',
 }
@@ -88,5 +92,7 @@ if args.text:
         print '\n\n'
     
 else:
+    print json.dumps(categories, default=Tag.toJson)
+
     pass
     # upload results and return a url !r1 ^9
