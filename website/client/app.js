@@ -10,13 +10,6 @@ Ext.create('Ext.app.Application', {
 
     launch: function () {
         
-        var parms = Ext.Object.fromQueryString(location.search);
-
-
-        if ( parms['reportId'])
-        {
-            BangAPI.setCache('reportId', parms['reportId']);
-        }
 
     }
 

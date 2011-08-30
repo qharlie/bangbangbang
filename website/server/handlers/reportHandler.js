@@ -28,11 +28,14 @@ ReportHandler = Class.extend({
             if (report && report.tags) {
 
                 for (var key in report.tags) {
+                    console.log(key);
                     tagList.push(key);
                 }
             }
 
+
             tagList.sort();
+
 
             bangUtil.p(res, parameters, tagList);
         });
@@ -50,6 +53,7 @@ ReportHandler = Class.extend({
 
         bangDao.findOne({_id: new ObjectId(reportId)}, function (report) {
 
+
             if (report.tags && report.tags[bangTag]) {
                 for (var i = 0; i < report.tags[bangTag].length; i++) {
                     var line = report.tags[bangTag][i];
@@ -58,15 +62,17 @@ ReportHandler = Class.extend({
                 }
             }
 
+
             bangUtil.p(res, parameters, tagList);
         });
 
     },
 
-    saveReport: function ( req, res, parameters)
-    {
+    saveReport: function (req, res, parameters) {
 
-        bangUtil.log('SAVING!', parameters);
+        bangDao.upsert({tags: eval("(" + parameters.report +")" )}, function (id) {
+            res.send(config.reportHost + "/?reportId=" + id);
+        });
     }
 
 });

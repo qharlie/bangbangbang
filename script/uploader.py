@@ -9,3 +9,4 @@ def uploadReport(report):
     conn = httplib.HTTPConnection("localhost", 3001)
     conn.request("POST", "/bangapi/report/saveReport", params, headers)
     response = conn.getresponse()
+    return response.read()

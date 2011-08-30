@@ -25,21 +25,15 @@ var BangAPI =
 
     },
 
-    getCache: function (key, skipDecode) {
+    getCache: function (key) {
 
-        var val = Ext.util.Cookies.get(key);
-        if (skipDecode)
-            return val;
-        else return Ext.decode(val);
-        //return $.jStorage.get(key);
+
+        return $.jStorage.get(key);
     } ,
 
 
-    setCache: function (key, value, skipEncode) {
-        if (!skipEncode)
-            value = Ext.encode(value)
-        Ext.util.Cookies.set(key, value, null, null, config.domain);
-
+    setCache: function (key, value) {
+        $.jStorage.set(key, value);
     },
 
 

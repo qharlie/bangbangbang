@@ -17,7 +17,12 @@ Ext.define('Bang.view.TagPanel', {
         var items = [];
         var me = this;
 
-        var reportId = BangAPI.getCache('reportId');
+
+
+        var parms = Ext.Object.fromQueryString(location.search);
+
+
+        var reportId = parms['reportId'];
 
         BangAPI.getTags(reportId, function (tags) {
             if (tags && tags.length) {

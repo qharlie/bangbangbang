@@ -37,8 +37,7 @@ app.configure(function () {
     app.set('view engine', 'ejs');
     app.register('.html', require('ejs'));
 
-    // subdomain names should retrieve from templates collection with url fields
-//    app.use(express.vhost('nis.formhogv2.com', require('./modules/nis/app.js').app));
+
 });
 
 app.configure('development', function() {
@@ -50,6 +49,7 @@ app.configure('production', function() {
 });
 
 // Routes
+
 app.post('/bangapi/:service/:method', function (req, res) {
     processApiRequest(req, res, req.params.service + 'Handler', req.params.method);
 });

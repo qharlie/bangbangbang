@@ -93,7 +93,8 @@ if args.text:
     
 else:
     report = json.dumps(categories, default=Tag.toJson)
-    uploader.uploadReport(report)
+    url = uploader.uploadReport(report)
+    print '\n', url, '\n'
 
     pass
     # upload results and return a url !r1 ^9
