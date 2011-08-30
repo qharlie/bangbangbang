@@ -61,6 +61,12 @@ ReportHandler = Class.extend({
             bangUtil.p(res, parameters, tagList);
         });
 
+    },
+
+    saveReport: function ( req, res, parameters)
+    {
+
+        bangUtil.log('SAVING!', parameters);
     }
 
 });

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import os, fileinput, re, collections, sys, json
+import os, fileinput, re, collections, sys, json, uploader
 from pythonExtractor import PythonExtractor
 from cExtractor import CstyleExtractor
 from tag import Tag
@@ -48,7 +48,7 @@ defaultSymbols = {
 
 # Main Script
 
-# Create a .bang file that has project info, login info, symbol info etc !r2 ^5
+# Create a .bang file  with -cp that has project info, login info, project name, , symbol info etc. !r2 ^5
 
 import argparse
 
@@ -92,7 +92,8 @@ if args.text:
         print '\n\n'
     
 else:
-    print json.dumps(categories, default=Tag.toJson)
+    report = json.dumps(categories, default=Tag.toJson)
+    uploader.uploadReport(report)
 
     pass
     # upload results and return a url !r1 ^9

@@ -50,13 +50,11 @@ app.configure('production', function() {
 });
 
 // Routes
-app.get('/post/:id', function (req, res) {
-
-
+app.post('/bangapi/:service/:method', function (req, res) {
+    processApiRequest(req, res, req.params.service + 'Handler', req.params.method);
 });
 
 app.get('/bangapi/:service/:method', function (req, res) {
-
     processApiRequest(req, res, req.params.service + 'Handler', req.params.method);
 
 });
