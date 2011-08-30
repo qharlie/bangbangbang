@@ -10,8 +10,19 @@ Ext.define('Bang.view.TagGrid', {
     title: 'Tags',
     alias: 'widget.tagGrid',
 
+    constructor: function ( config )
+    {
+        this.reportId = config.reportId;
+        this.bangTag = config.bangTag;
+
+
+        this.callParent(arguments);
+    },
+
 
     initComponent: function () {
+
+        var me = this;
 
         this.columns = [
             {
@@ -27,7 +38,7 @@ Ext.define('Bang.view.TagGrid', {
             },
             {
                 header: 'File',
-                dataIndex: 'file',
+                dataIndex: 'fileName',
                 flex: .5,
                 renderer: function (value, meta, record) {
                     return "<div class='fileColumn'>&nbsp;" + value + "</div>";
@@ -65,26 +76,62 @@ Ext.define('Bang.view.TagGrid', {
             },
         ];
 
-        this.store = Ext.create('Ext.data.ArrayStore', {
-            // store configs
-            autoDestroy: true,
-            storeId: 'myStore',
-            // reader configs
-            idIndex: 0,
+        this.store = Ext.create('Ext.data.Store', {
+            pageSize: 100,
             fields: [
-                'comment','file','lineNumber','priority'
+                'comment','fileName','lineNumber','priority'
             ],
-            data:
-                [
-                    ['#Fix the height to be the width of the screen','client/app/RoleGrid.js','126','7'],
-                    ['#TODO: Fix this to use inheritance #ui #charliedoesntknowextFix the height to be the width of the screen','client/app/view/formdesigner/DesignerPanel.js','7','4'],
-                    ['#Change screens when a template is active #soon #uiFix the height to be the width of the screen','client/app/view/formfiller/FormEditorPanel.js','56','2'],
-                    ['#This isnt used yet, the fields are in place','client/app/view/admin/NewUserDialog.js','1230', undefined],
-                    ['#The honey badger doesnt give a shit','client/app/view/admin/NewUserDialog.js','100', 7],
-                    ['#Oh no you did not do this brad','client/app/view/admin/EdUserDialog.js','45', 1],
+            storeId: 'tagReportStore',
+            autoLoad: true,
+            proxy: {
 
-                ]
+                type: 'jsonp',
+                url: '/bangapi/report/getIssues',
+                extraParams: { reportId: me.reportId, bangTag: me.bangTag },
+                reader: {
+                    root: 'data',
+                    totalProperty: 'total'
+                },
+                listeners: {
+
+//                    exception: exceptionHandler
+                }
+            },
+
+            listeners:
+            {
+//                beforeload: function (ds) {
+//
+//                    ds.proxy.extraParams = {
+//                        reeportId: FormHogAPI.getCache('orgId'),
+//
+//                    };
+//                }
+            }
+
         });
+
+
+//        this.store = Ext.create('Ext.data.ArrayStore', {
+//            // store configs
+//            autoDestroy: true,
+//            storeId: 'myStore',
+//            // reader configs
+//            idIndex: 0,
+//            fields: [
+//                'comment','file','lineNumber','priority'
+//            ],
+//            data:
+//                [
+//                    ['#Fix the height to be the width of the screen','client/app/RoleGrid.js','126','7'],
+//                    ['#TODO: Fix this to use inheritance #ui #charliedoesntknowextFix the height to be the width of the screen','client/app/view/formdesigner/DesignerPanel.js','7','4'],
+//                    ['#Change screens when a template is active #soon #uiFix the height to be the width of the screen','client/app/view/formfiller/FormEditorPanel.js','56','2'],
+//                    ['#This isnt used yet, the fields are in place','client/app/view/admin/NewUserDialog.js','1230', undefined],
+//                    ['#The honey badger doesnt give a shit','client/app/view/admin/NewUserDialog.js','100', 7],
+//                    ['#Oh no you did not do this brad','client/app/view/admin/EdUserDialog.js','45', 1],
+//
+//                ]
+//        });
 
         this.callParent(arguments);
 

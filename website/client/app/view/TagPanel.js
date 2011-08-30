@@ -16,15 +16,22 @@ Ext.define('Bang.view.TagPanel', {
 
         var items = [];
         var me = this;
-        BangAPI.getTags(BangAPI.getCache('reportId'), function (tags) {
+
+        var reportId = BangAPI.getCache('reportId');
+
+        BangAPI.getTags(reportId, function (tags) {
             if (tags && tags.length) {
 
                 for (var i = 0; i < tags.length; i++) {
 
+                    var tagName = tags[i];
+
                     me.add(
                         {
-                            title: '<img src="resources/images/tag.png" alt=""> <span style="font-family: Courier;font-size: 1.2em;font-weight: bold;">' + tags[i] + '</span>',
+                            title: '<img src="resources/images/tag.png" alt=""> <span style="font-family: Courier;font-size: 1.2em;font-weight: bold;">' + tagName + '</span>',
                             xtype: 'tagGrid',
+                            reportId: reportId,
+                            bangTag: tagName
 
                         }
                     );

@@ -38,6 +38,29 @@ ReportHandler = Class.extend({
         });
 
 
+    },
+
+    getIssues: function (req, res, parameters) {
+        bangUtil.log("Handling getIssues", parameters);
+
+        var reportId = parameters.reportId;
+        var bangTag = parameters.bangTag;
+
+        var tagList = [];
+
+        bangDao.findOne({_id: new ObjectId(reportId)}, function (report) {
+
+            if (report.tags && report.tags[bangTag]) {
+                for (var i = 0; i < report.tags[bangTag].length; i++) {
+                    var line = report.tags[bangTag][i];
+                    delete line['fileContents'];
+                    tagList.push(line);
+                }
+            }
+
+            bangUtil.p(res, parameters, tagList);
+        });
+
     }
 
 });
