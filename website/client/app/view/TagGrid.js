@@ -62,15 +62,9 @@ Ext.define('Bang.view.TagGrid', {
                 sortable: true,
                 renderer: function (value, meta, record) {
                     var cls = 'noPriorityColumn';
-                    if (value && value >= 0) {
-                        cls = 'lowPriorityColumn';
-                    }
-                    if (value && value >= 4) {
-                        cls = 'mediumPriorityColumn';
-                    }
-                    if (value && value >= 7) {
-                        cls = 'highPriorityColumn';
-                    }
+
+
+                    cls = getClassForPriority(value, cls);
                     return "<div class='" + cls + "'>&nbsp;" + value + "</div>";
                 }
             },
@@ -100,6 +94,30 @@ Ext.define('Bang.view.TagGrid', {
 
             listeners:
             {
+
+                load: function ( store, records, successful, operation, options )
+                {
+                    var averageCount = 0;
+                    var totalPriority = 0;
+                    for ( var i = 0; i < records.length;i++ )
+                    {
+                        var priority = parseInt(records[i].data.priority);
+                        if ( priority > 0 )
+                        {
+
+                            totalPriority += priority;
+                            averageCount++;
+                        }
+
+                    }
+
+                    if ( averageCount > 0 )
+                    {
+                        var averagePriority = totalPriority / averageCount;
+                        
+                    }
+
+                }
 //                beforeload: function (ds) {
 //
 //                    ds.proxy.extraParams = {

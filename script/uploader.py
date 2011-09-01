@@ -1,4 +1,5 @@
 import httplib, urllib
+from config import config
 
 
 def uploadReport(report):
@@ -6,7 +7,7 @@ def uploadReport(report):
 
     params = urllib.urlencode({'report': report})
     headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
-    conn = httplib.HTTPConnection("localhost", 3001)
+    conn = httplib.HTTPConnection(config['host'], config['port'])
     conn.request("POST", "/bangapi/report/saveReport", params, headers)
     response = conn.getresponse()
     return response.read()

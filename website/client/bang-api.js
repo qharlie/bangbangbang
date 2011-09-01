@@ -4,12 +4,24 @@
 var BangAPI =
 {
 
+    getHistory: function (callback) {
+        this.jsonp('bangapi/report/getHistory', { bangId: BangAPI.getBangId() }, function (data) {
+            if (callback) callback(data);
+        });
+    },
+
     getTags: function (reportId, callback) {
 
         this.jsonp('bangapi/report/getTags', { reportId: reportId }, function (data) {
             if (callback) callback(data);
         });
 
+    },
+
+    updateReportOwner: function (reportId, bangId) {
+        this.jsonp('bangapi/report/updateReportOwner', { reportId: reportId , bangId: bangId }, function () {
+
+        });
     },
 
     jsonp: function (url, parameters, callback) {
@@ -35,6 +47,20 @@ var BangAPI =
     setCache: function (key, value) {
         $.jStorage.set(key, value);
     },
+
+    getBangId: function () {
+        var bangId = this.getCache('bangId');
+        if (!bangId) {
+            bangId = this.generateBangId();
+            this.setCache('bangId', bangId);
+        }
+        return bangId;
+    },
+
+    generateBangId: function () {
+        return '12345';
+    }
+
 
 
 

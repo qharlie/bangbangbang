@@ -1,5 +1,5 @@
 import json
-#Make a toJson method and push to the server !r1 ^9
+
 class Tag:
 
     def __init__(self, fileName, lineNumber, tag, comment, fileContents, priority = 0):
@@ -7,7 +7,9 @@ class Tag:
         self.lineNumber = lineNumber
         self.tag = tag
         self.comment = comment
-        self.fileContents = fileContents
+# This is causing the server to hang on large committs, fix this !eventually
+#        self.fileContents = fileContents
+        self.fileContents = ''
         self.priority = priority
 
 

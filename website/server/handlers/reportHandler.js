@@ -1,7 +1,7 @@
 var config = require('../config'),
     Class = require('simple-class').Class,
     bangUtil = require('../util/bangUtil.js'),
-    bangDao = require('../dao/bangDao.js'),
+    reportDao = require('../dao/bangDao.js'),
     ObjectId = require('mongolian').ObjectId;
 
 
@@ -21,7 +21,7 @@ ReportHandler = Class.extend({
         var reportId = parameters.reportId;
 
 
-        bangDao.findOne({_id: new ObjectId(reportId)}, function (report) {
+        reportDao.findOne({_id: new ObjectId(reportId)}, function (report) {
             var tagList = [];
 
 
@@ -43,6 +43,45 @@ ReportHandler = Class.extend({
 
     },
 
+    updateReportOwner: function (req, res, parameters) {
+        bangUtil.log("Handling updateReportOwner with ", parameters);
+        var reportId = parameters.reportId;
+        var bangId = parameters.bangId;
+
+        reportDao.findOne({_id: new ObjectId(reportId)}, function (report) {
+
+            if (!report.bangId) {
+                report.bangId = bangId;
+                reportDao.upsert(report);
+            }
+
+        });
+
+        bangUtil.p(res, parameters, {});
+
+    },
+
+    getHistory: function (req, res, parameters) {
+        var bangId = parameters.bangId;
+        bangUtil.log("Handling getHistory", parameters);
+
+        var results = [];
+
+        reportDao.find({bangId: bangId}, {project: 1}, function (reports) {
+            if (reports && reports.length) {
+
+                for (var i = 0; i < reports.length; i++) {
+                    var report = reports[i];
+
+                    results.push({reportId: report._id, project: report.project, createdOn: report.createdOn });
+                }
+
+            }
+            bangUtil.p(res, parameters, results);
+        });
+
+    },
+
     getIssues: function (req, res, parameters) {
         bangUtil.log("Handling getIssues", parameters);
 
@@ -51,7 +90,7 @@ ReportHandler = Class.extend({
 
         var tagList = [];
 
-        bangDao.findOne({_id: new ObjectId(reportId)}, function (report) {
+        reportDao.findOne({_id: new ObjectId(reportId)}, function (report) {
 
 
             if (report.tags && report.tags[bangTag]) {
@@ -69,8 +108,8 @@ ReportHandler = Class.extend({
     },
 
     saveReport: function (req, res, parameters) {
-
-        bangDao.upsert({tags: eval("(" + parameters.report +")" )}, function (id) {
+        var report = eval("(" + parameters.report + ")");
+        reportDao.upsert({tags: report.tags, project: report.project, createdOn: new Date()  }, function (id) {
             res.send(config.reportHost + "/?reportId=" + id);
         });
     }

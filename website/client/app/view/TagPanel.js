@@ -22,6 +22,8 @@ Ext.define('Bang.view.TagPanel', {
         var parms = Ext.Object.fromQueryString(location.search);
 
 
+        var bangId = BangAPI.getBangId();
+        
         var reportId = parms['reportId'];
 
         BangAPI.getTags(reportId, function (tags) {
@@ -41,6 +43,10 @@ Ext.define('Bang.view.TagPanel', {
                         }
                     );
                 }
+
+                BangAPI.updateReportOwner(reportId, bangId );
+
+
             }
 
 //            me.items = items;
