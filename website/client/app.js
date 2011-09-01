@@ -18,7 +18,7 @@ Ext.create('Ext.app.Application', {
 })
 
 
-function getClassForPriority(value, cls) {
+function getGridClassForPriority(value, cls) {
     var cls = 'noPriorityColumn';
     
     if (value && value >= 0) {
@@ -29,6 +29,21 @@ function getClassForPriority(value, cls) {
     }
     if (value && value >= 7) {
         cls = 'highPriorityColumn';
+    }
+    return cls;
+}
+
+function getTitleClassForPriority(value, cls) {
+    var cls = 'noPriorityTitle';
+
+    if (value && value >= 0) {
+        cls = 'lowPriorityTitle';
+    }
+    if (value && value >= 4) {
+        cls = 'mediumPriorityTitle';
+    }
+    if (value && value >= 7) {
+        cls = 'highPriorityTitle';
     }
     return cls;
 }

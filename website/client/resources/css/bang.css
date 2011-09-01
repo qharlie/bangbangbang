@@ -56,6 +56,24 @@
 
 }
 
+.highPriorityTitle {
+
+    color: #ff0000;
+
+}
+
+.lowPriorityTitle {
+
+    color: #6f6fe4;
+
+}
+
+.mediumPriorityTitle {
+
+    color: #ff8800;
+
+}
+
 .menuPanel {
     font-family: helvetica;
     margin: 1em;

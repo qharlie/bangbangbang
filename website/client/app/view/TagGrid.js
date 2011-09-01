@@ -64,7 +64,7 @@ Ext.define('Bang.view.TagGrid', {
                     var cls = 'noPriorityColumn';
 
 
-                    cls = getClassForPriority(value, cls);
+                    cls = getGridClassForPriority(value, cls);
                     return "<div class='" + cls + "'>&nbsp;" + value + "</div>";
                 }
             },
@@ -114,6 +114,9 @@ Ext.define('Bang.view.TagGrid', {
                     if ( averageCount > 0 )
                     {
                         var averagePriority = totalPriority / averageCount;
+                        var cls = getTitleClassForPriority(averagePriority);
+                        var title = me.title;
+                        me.setTitle('<span class="' + cls + '">' + title + '</span>');
                         
                     }
 
