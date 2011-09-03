@@ -1,32 +1,159 @@
+<!doctype html>
+
 <html>
 <head>
-    <title>Bang!</title>
+    <script src="lib/codemirror/codemirror.js"></script>
+    <script src="lib/codemirror/mode/javascript/javascript.js"></script>
+    <link href="lib/codemirror/codemirror.css" rel="stylesheet"/>
+    
+    <style>
+        html {
+            background: #202050;
+            font-family: CentSchbook Mono BT, Bitstream Vera Sans Mono, monofont, monospace;
+        }
 
-    <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all-gray.css"/>
-    <link rel="stylesheet" type="text/css" href="resources/css/xtheme-newgentheme.css">
-    <link rel="stylesheet" type="text/css" href="resources/css/bang.css">
+        body {
+            background: #ddd;
+            width: 600px;
+            border: 10px solid #fff;
+            margin: 2em auto;
+            padding: 2em
+        }
 
+        h1 {
+            font-size: 200px;
+            line-height: 1;
+            font-family: "gubblebum-blocky", monospace;
+            color: #f00;
+            text-align: center;
+            padding: 0;
+            margin: 0 auto;
+            text-indent: -999em;
+            height: 202px;
+            width: 519px;
+            background: url(resources/images/bang.png) center no-repeat;
+        }
 
-    <script type="text/javascript" src="extjs/ext-all-debug-w-comments.js"></script>
-    <script type="text/javascript">
-        Ext.Loader.setConfig({
-            enabled : true
-        });
-        Ext.Loader.setPath('Ext.ux', 'extjs/ux');
-    </script>
-        <script type="text/javascript" src="lib/jstorage.js"></script>
-    <script type="text/javascript" src="lib/jsonp-min.js"></script>
-    <script type="text/javascript" src="lib/simple-class.js"></script>
-    <script type="text/javascript" src="config.js"></script>
-    <script type="text/javascript" src="bang-api.js"></script>
-    <script type="text/javascript" src="app.js"></script>
+        h2 {
+            color: #202050;
+            font-size: 100%;
+        }
 
+        p, ul, ol {
+            margin: 1em 0 0;
+            padding: 0
+        }
 
+        li {
+            list-style-position: inside
+        }
+
+        a {
+            color: #f00;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .install {
+            background: #fff;
+            outline: 1px solid #ccc;
+            padding: 0 2px;
+        }
+
+        @font-face {
+            font-family: monofont;
+            src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMono.ttf) format("truetype");
+        }
+
+        @font-face {
+            font-family: monofont;
+            font-style: italic;
+            src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMoIt.ttf) format("truetype");
+        }
+
+        @font-face {
+            font-family: monofont;
+            font-weight: bold;
+            src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMoBd.ttf) format("truetype");
+        }
+
+        @font-face {
+            font-family: monofont;
+            font-style: italic;
+            font-weight: bold;
+            src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMoBI.ttf) format("truetype");
+        }
+
+    </style>
+    <title>BANG. inline tickets for lazy programmers</title>
 </head>
-<body>
+<h1>bang</h1>
 
-<div id="bang-div"></div>
+<p>
+    Example Usage
+</p>
+
+<div>
+    <textarea id="code" name="code">
+        // Demo code (the actual new parser character stream implementation)
+
+        function StringStream(string) {
+        this.pos = 0;
+        this.string = string;
+        }
+
+        StringStream.prototype = {
+        done: function() {return this.pos >= this.string.length;},
+        peek: function() {return this.string.charAt(this.pos);},
+        next: function() {
+        if (this.pos &lt; this.string.length)
+        return this.string.charAt(this.pos++);
+        },
+        eat: function(match) {
+        var ch = this.string.charAt(this.pos);
+        if (typeof match == "string") var ok = ch == match;
+        else var ok = ch &amp;&amp; match.test ? match.test(ch) : match(ch);
+        if (ok) {this.pos++; return ch;}
+        },
+        eatWhile: function(match) {
+        var start = this.pos;
+        while (this.eat(match));
+        if (this.pos > start) return this.string.slice(start, this.pos);
+        },
+        backUp: function(n) {this.pos -= n;},
+        column: function() {return this.pos;},
+        eatSpace: function() {
+        var start = this.pos;
+        while (/\s/.test(this.string.charAt(this.pos))) this.pos++;
+        return this.pos - start;
+        },
+        match: function(pattern, consume, caseInsensitive) {
+        if (typeof pattern == "string") {
+        function cased(str) {return caseInsensitive ? str.toLowerCase() : str;}
+        if (cased(this.string).indexOf(cased(pattern), this.pos) == this.pos) {
+        if (consume !== false) this.pos += str.length;
+        return true;
+        }
+        }
+        else {
+        var match = this.string.slice(this.pos).match(pattern);
+        if (match &amp;&amp; consume !== false) this.pos += match[0].length;
+        return match;
+        }
+        }
+        };
+    </textarea>
+</div>
+
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        matchBrackets: true
+    });
+</script>
 
 </body>
-
-</html>
+</html> 

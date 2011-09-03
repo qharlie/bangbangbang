@@ -110,7 +110,7 @@ ReportHandler = Class.extend({
     saveReport: function (req, res, parameters) {
         var report = eval("(" + parameters.report + ")");
         reportDao.upsert({tags: report.tags, project: report.project, createdOn: new Date()  }, function (id) {
-            res.send(config.reportHost + "/?reportId=" + id);
+            res.send(config.reportHost + "?reportId=" + id);
         });
     }
 
