@@ -10,6 +10,7 @@ Ext.define('Bang.view.Viewport', {
         'Bang.view.TagPanel',
         'Bang.view.HistoryPanel',
         'Bang.view.North',
+        'Bang.view.CommentsDialog',
         
 
     ],

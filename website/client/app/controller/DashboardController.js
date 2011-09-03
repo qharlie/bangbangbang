@@ -13,7 +13,9 @@ Ext.define('Bang.controller.DashboardController', {
             'viewport tagGrid':
             {
                 itemdblclick: function (view, record, item, rowIndex, e) {
-                   
+
+                   var dlg = new Bang.view.CommentsDialog( { record: record.data , title: 'Priority ' + record.data.priority  } );
+                    dlg.show();
                 }
             },
         });

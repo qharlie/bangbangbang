@@ -92,3 +92,21 @@ A:hover {
     text-decoration: underline;
     color: red;
 }
+
+.tagColumn .x-form-field {
+    font-family: helvetica;
+    font-size: 1.3em;
+    color: #000066;
+}
+
+.fileLineHtml {
+    font-family: helvetica;
+    font-size: 1.3em;
+    color: #540054;
+}
+
+.lineNumberHtml {
+    font-family: helvetica;
+    font-size: 1.3em;
+    
+}
