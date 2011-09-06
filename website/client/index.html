@@ -2,19 +2,16 @@
 
 <html>
 <head>
-    <script src="lib/codemirror/codemirror.js"></script>
-    <script src="lib/codemirror/mode/javascript/javascript.js"></script>
-    <link href="lib/codemirror/codemirror.css" rel="stylesheet"/>
-    
+
     <style>
         html {
-            background: #202050;
+            background: #496085;
             font-family: CentSchbook Mono BT, Bitstream Vera Sans Mono, monofont, monospace;
         }
 
         body {
             background: #ddd;
-            width: 600px;
+            width: 800px;
             border: 10px solid #fff;
             margin: 2em auto;
             padding: 2em
@@ -24,14 +21,14 @@
             font-size: 200px;
             line-height: 1;
             font-family: "gubblebum-blocky", monospace;
-            color: #f00;
+            color: #da70d6;
             text-align: center;
             padding: 0;
             margin: 0 auto;
             text-indent: -999em;
             height: 202px;
             width: 519px;
-            background: url(resources/images/bang.png) center no-repeat;
+            background: url(resources/images/bang2.png) center no-repeat;
         }
 
         h2 {
@@ -63,97 +60,73 @@
             padding: 0 2px;
         }
 
-        @font-face {
-            font-family: monofont;
-            src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMono.ttf) format("truetype");
-        }
-
-        @font-face {
-            font-family: monofont;
-            font-style: italic;
-            src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMoIt.ttf) format("truetype");
-        }
-
-        @font-face {
-            font-family: monofont;
-            font-weight: bold;
-            src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMoBd.ttf) format("truetype");
-        }
-
-        @font-face {
-            font-family: monofont;
-            font-style: italic;
-            font-weight: bold;
-            src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMoBI.ttf) format("truetype");
-        }
-
     </style>
     <title>BANG. inline tickets for lazy programmers</title>
 </head>
 <h1>bang</h1>
 
-<p>
-    Example Usage
+BANG is an inline ticketing system that allows you to <span style="color:  purple;font-weight: bold;">!tag</span> your
+comments and assign them a <span style="color:  #4b0082;font-weight: bold;">^priority</span> , and run a report that
+will generate a <a href="#">text report</a> or a <a href="report.html">web report</a>, for keeping track of what needs doing.
+
+<p style="text-decoration: underline;">
+    Install:
 </p>
 
+<div style="background-color: white;font-size: 1.2em;text-align: center;">
+    curl http://npmjs.org/install.sh | sh
+</div>
+<br/>
+
+<p>
+    <span style="text-decoration: underline;">Example Usage</span>:
+    <select>
+        <option>Javascript</option>
+        <option>Python</option>
+    </select>
+</p>
+
+<div style="background-color: white;">
+
+    <span style="color: blue;">var</span> SocketHandler = <span style="color: #8a2be2;">function</span> ()
+    {
+    <br/>
+    <br/>
+    <span style="color:  red;">// Fix this to read a config file on init </span> <span
+        style="color:  purple;font-weight: bold;">!charlie</span><span
+        style="color:  #4b0082;font-weight: bold;"> ^5</span>
+    <br/>
+    <span style="color: blue;">this.host</span> = <span style="color: #228b22;">"localhost"</span>;
+    <br/>
+    <br/>
+
+    };
+</div>
+<br/>
+
 <div>
-    <textarea id="code" name="code">
-        // Demo code (the actual new parser character stream implementation)
-
-        function StringStream(string) {
-        this.pos = 0;
-        this.string = string;
-        }
-
-        StringStream.prototype = {
-        done: function() {return this.pos >= this.string.length;},
-        peek: function() {return this.string.charAt(this.pos);},
-        next: function() {
-        if (this.pos &lt; this.string.length)
-        return this.string.charAt(this.pos++);
-        },
-        eat: function(match) {
-        var ch = this.string.charAt(this.pos);
-        if (typeof match == "string") var ok = ch == match;
-        else var ok = ch &amp;&amp; match.test ? match.test(ch) : match(ch);
-        if (ok) {this.pos++; return ch;}
-        },
-        eatWhile: function(match) {
-        var start = this.pos;
-        while (this.eat(match));
-        if (this.pos > start) return this.string.slice(start, this.pos);
-        },
-        backUp: function(n) {this.pos -= n;},
-        column: function() {return this.pos;},
-        eatSpace: function() {
-        var start = this.pos;
-        while (/\s/.test(this.string.charAt(this.pos))) this.pos++;
-        return this.pos - start;
-        },
-        match: function(pattern, consume, caseInsensitive) {
-        if (typeof pattern == "string") {
-        function cased(str) {return caseInsensitive ? str.toLowerCase() : str;}
-        if (cased(this.string).indexOf(cased(pattern), this.pos) == this.pos) {
-        if (consume !== false) this.pos += str.length;
-        return true;
-        }
-        }
-        else {
-        var match = this.string.slice(this.pos).match(pattern);
-        if (match &amp;&amp; consume !== false) this.pos += match[0].length;
-        return match;
-        }
-        }
-        };
-    </textarea>
+    The <span style="color:  purple;font-weight: bold;">!tag</span> is to categorize the comment , and the <span
+        style="color:  #4b0082;font-weight: bold;"> ^N</span> is to mark the priority [0-9]
 </div>
 
-<script>
-    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        lineNumbers: true,
-        matchBrackets: true
-    });
-</script>
+<p style="font-size: 1.3em;text-align: center;">
+    <a href="report.html">See the example report</a>
+</p>
+
+<br/>
+
+<p>
+<ul>
+    <li>
+        This site design is completely stolen from <a href="http://www.npmjs.org">NPM</a> , the package manager for <a
+            href="http://www.nodejs.org"> Node </a>
+    </li>
+    <li>
+        BANG is written in <a href="http://python.org/">Python</a> and <a href="http://www.nodejs.org">Node</a>, using <a href="http://expressjs.com/">Express</a>, <a href="https://github.com/marcello3d/node-mongolian">Mongolian</a>, and <a href="http://www.mongodb.org/">MongoDB</a>.
+    </li>
+</ul>
+
+</p>
 
 </body>
 </html> 
