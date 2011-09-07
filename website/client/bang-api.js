@@ -58,7 +58,7 @@ var BangAPI =
     },
 
     generateBangId: function () {
-        return '12345';
+        return Math.random().toString().substr(2);
     }
 
 
