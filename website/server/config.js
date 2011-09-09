@@ -14,7 +14,7 @@ var Config =
         /** @property */
 
         appPort: 3001,
-        reportHost: 'http://localhost:3001/report.html'
+        reportHost: 'http://thecodebase.com/bang/report.html'
 
 
     }

@@ -1,5 +1,5 @@
 config = {
-    'host': 'thecodebase.com',
-    'port': 3001,
+    'host': 'thecodebase.com/bang/',
+    'port': 80,
     'longLine': 500
 };
