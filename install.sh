@@ -16,9 +16,13 @@ fi
 
 #Check to see if the have write permissions
 
-if [ ! -w /opt/  ]; then
-    echo "You need write permissions for /opt/ and /usr/bin to install BANG, try sudo'ing ?"
-    exit 1
+if [ ! -e /opt/ ]; then
+
+    mkdir /opt/    
+    if [ ! -w /opt/  ]; then
+	echo "You need write permissions for /opt/ and /usr/bin to install BANG, try sudo'ing ?"
+	exit 1
+    fi
 fi
 
 if [ ! -w /usr/bin/  ]; then

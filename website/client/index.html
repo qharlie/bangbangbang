@@ -20,7 +20,6 @@
         h1 {
             font-size: 200px;
             line-height: 1;
-            font-family: "gubblebum-blocky", monospace;
             color: #da70d6;
             text-align: center;
             padding: 0;
@@ -45,14 +44,14 @@
             list-style-position: inside
         }
 
-        /*a {*/
+            /*a {*/
             /*color: #f5f5f5;*/
             /*text-decoration: none;*/
-        /*}*/
+            /*}*/
 
-        /*a:hover {*/
+            /*a:hover {*/
             /*text-decoration: underline;*/
-        /*}*/
+            /*}*/
 
         .install {
             background: #fff;
@@ -62,45 +61,183 @@
 
     </style>
     <title>BANG. inline tickets for lazy programmers</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/jquery.snippet.min.css">
+    <script src="resources/js/jquery.js"></script>
+    <script src="resources/js/jquery.snippet.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+            $("pre.js").snippet("javascript", { style: 'ide-eclipse'});
+            $("pre.py").snippet("python", { style: 'ide-eclipse'});
+            $("pre.cpp").snippet("cpp", { style: 'ide-eclipse'});
+            $("pre.php").snippet("php", { style: 'ide-eclipse'});
+            $("pre.java").snippet("java", { style: 'ide-eclipse'});
+
+            showExample('py');
+
+        });
+
+        function showExample(id) {
+
+            $('div').hide();
+            $('#example-' + id).show();
+            $('#example-' + id + ' div').show();
+
+
+        }
+
+    </script>
+
 </head>
+
 <h1>bang</h1>
 
 BANG is an inline ticketing system that allows you to <span style="color:  purple;font-weight: bold;">!tag</span> your
-comments and assign them a <span style="color:  #4b0082;font-weight: bold;">^priority</span>, then displays them with a <a href="resources/images/screen-text.png">text report</a> or a <a href="report.html">web report</a> for easily keeping track of TODO's and the like.
+comments and assign them a <span style="color:  #4b0082;font-weight: bold;">^priority</span>, then displays them with a
+<a href="resources/images/screen-text.png">text report</a> or a <a href="report.html">web report</a> for easily keeping
+track of TODO's and the like.
 
 <p style="text-decoration: underline;">
     To Install:
 </p>
 
-<div style="background-color: white;font-size: 1.2em;text-align: center;">
-    curl http://www.quick-ticket.com | sh
-</div>
+<p style="background-color: white;font-size: 1.2em;text-align: center;">
+    curl http://www.quick-ticket.com/install.sh | sudo sh
+</p>
 <br/>
 
 <p>
     <span style="text-decoration: underline;">Example Usage</span>:
-    <select>
-        <option>Javascript</option>
-        <option>Python</option>
+    <select onchange="showExample(this.value);return false;">
+        <option value="cpp">C/C++</option>
+        <option value="java">Java</option>
+        <option value="js">Javascript</option>
+        <option value="php">PHP</option>
+        <option value="py" selected>Python</option>
     </select>
 </p>
 
-<div style="background-color: white;">
-
-    <span style="color: blue;">var</span> SocketHandler = <span style="color: #8a2be2;">function</span> ()
-    {
+<div id="example-js">
     <br/>
-    <br/>
-    <span style="color:  red;">// Fix this to read a config file on init </span> <span
-        style="color:  purple;font-weight: bold;">!charlie</span><span
-        style="color:  #4b0082;font-weight: bold;"> ^5</span>
-    <br/>
-    <span style="color: blue;">this.host</span> = <span style="color: #228b22;">"localhost"</span>;
-    <br/>
-    <br/>
-
-    };
+    you@yourcomputer:~$ <span style="font-weight: bold;">bang -ljs js_folder/</span>
+    <pre class="js">
+// This selector is awful, fix it !charlie !ui ^5
+function showExample(id) {
+    $('div').hide();
+    $('#example-' + id).show();
+    $('#example-' + id + ' div').show();
+}
+    </pre>
 </div>
+<div id="example-java">
+    <br/>
+    you@yourcomputer:~$ <span style="font-weight: bold;">bang -ljava jaguar/src/</span>
+    <pre class="java">
+// Change to use GUIT style !gal ^7
+import com.guit.client.binder.contributor.RunAsync;
+import com.guit.client.place.Place;
+import com.jwavro.jaguar.client.model.Building;
+
+@RunAsync
+public class BuildingList extends BuildingListBase implements Place &lt;Integer&gt; {
+
+  @Inject
+  @MainPanel
+  public AcceptsOneWidget mainPanel;
+
+  @Override
+  void create$click() {
+    placeManager.go(BuildingForm.class);
+  }
+
+
+}
+    </pre>
+</div>
+<div id="example-py">
+    <br/>
+    you@yourcomputer:~$ <span style="font-weight: bold;">bang -lpy python_project/</span>
+    <pre class="py">
+
+#Fix the tagList not being sorted correctly !r1 ^7
+
+for k, v in categories.iteritems():
+    print k, '\n\t'
+    tagList = sorted(v, key=lambda v: v.priority, reverse=True)
+    for tag in tagList:
+        print '\t' + str(tag)
+    print '\n\n'
+    </pre>
+</div>
+<div id="example-cpp">
+    <br/>
+    you@yourcomputer:~$ <span style="font-weight: bold;">bang -lcpp node/src/</span>
+<pre class="cpp">
+
+
+// Change the Arguments to use the new Arguments2 class !eventualy ^0
+static Handle &lt;Value&gt; Pipe(const Arguments& args) {
+  HandleScope scope;
+  int fds[2];
+
+  if (pipe(fds) < 0) return ThrowException(ErrnoException(errno, "pipe"));
+
+  Local &lt;Array&gt; a = Array::New(2);
+  a->Set(Integer::New(0), Integer::New(fds[0]));
+  a->Set(Integer::New(1), Integer::New(fds[1]));
+  return scope.Close(a);
+}
+
+
+</pre>
+</div>
+
+<div id="example-php">
+    <br/>
+     you@yourcomputer:~$ <span style="font-weight: bold;">bang -lphp php_project/</span>
+<pre class="php">
+
+//Make a config file for the FILE_NAME and official tweet names !r2 ^3
+
+require_once "SeverityStatus.enum.php";
+require_once "TrainStatus.class.php";
+
+class TubeTweetApi {
+
+    public static $FILE_NAME = "/tmp/tube_tweet_serialized.txt";
+    public static $OFFICIAL_TWEET_NAMES = array("tubeupdates", "tweetthetube", "tubetweetapp");
+
+
+    private $trains = array();
+    private $geoTweets; //= new ArrayObject(array());
+
+    function __construct() {
+
+        $this->trains [1] = $this->trains['Bakerloo'] = new TrainStatus("Bakerloo", "Bakerloo", "images/bakerloo.png", 1);
+        $this->trains [2] = $this->trains['Central'] = new TrainStatus("Central", "Central", "images/central.png", 2);
+        $this->trains [3] = $this->trains['Circle'] = new TrainStatus("Circle", "Circle", "images/circle.png", 3);
+        $this->trains [4] = $this->trains['District'] = new TrainStatus("District", "District", "images/district.png", 4);
+        $this->trains [5] = $this->trains['Hammersmith'] = new TrainStatus("Hammersmith & City", "Hammersmith", "images/hsmith.png", 5);
+        $this->trains [6] = $this->trains['Jubilee'] = new TrainStatus("Jubilee", "Jubilee", "images/jubilee.png", 6);
+        $this->trains [7] = $this->trains['Metro'] = new TrainStatus("Metro", "Metro", "images/metro.png", 7);
+        $this->trains [8] = $this->trains['Northern'] = new TrainStatus("Northern", "Northern", "images/northern.png", 8);
+        $this->trains [9] = $this->trains['Piccadilly'] = new TrainStatus("Piccadilly", "Piccadilly", "images/piccadilly.png", 9);
+        $this->trains [10] = $this->trains['Victoria'] = new TrainStatus("Victoria", "Victoria", "images/victoria.png", 10);
+        $this->trains [11] = $this->trains['Waterloo'] = new TrainStatus("Waterloo & City", "Waterloo", "images/waterloo.png", 11);
+        $this->trains [12] = $this->trains['DLR'] = new TrainStatus("DLR", "DLR", "images/dlr.png", 12);
+        $this->trains [13] = $this->trains['London'] = new TrainStatus("Overground", "Overground", "images/overground.png", 13);
+
+        $this->geoTweets = new ArrayObject(array());
+
+        $this->downloadTweets();
+
+    }
+}
+
+
+</pre>
+</div>
+
 <br/>
 
 <div>
@@ -121,10 +258,12 @@ comments and assign them a <span style="color:  #4b0082;font-weight: bold;">^pri
             href="http://www.nodejs.org"> Node </a>
     </li>
     <li>
-        BANG is written in <a href="http://python.org/">Python</a> and <a href="http://www.nodejs.org">Node</a>, using <a href="http://expressjs.com/">Express</a>, <a href="https://github.com/marcello3d/node-mongolian">Mongolian</a>, and <a href="http://www.mongodb.org/">MongoDB</a>.
+        BANG is written in <a href="http://python.org/">Python</a> and <a href="http://www.nodejs.org">Node</a>, using
+        <a href="http://expressjs.com/">Express</a>, <a
+            href="https://github.com/marcello3d/node-mongolian">Mongolian</a>, and <a href="http://www.mongodb.org/">MongoDB</a>.
     </li>
     <li>
-        Grab the source at <a href="https://github.com/qbert65536/bangbang">https://github.com/qbert65536/bangbang</a>
+        Grab the source and report issues at <a href="https://github.com/qbert65536/bangbang">Github</a>
     </li>
 </ul>
 

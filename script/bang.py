@@ -42,8 +42,10 @@ extracters = {
     'js': CstyleExtractor,
     'java': CstyleExtractor,
     'c': CstyleExtractor,
+    'cpp': CstyleExtractor,
     'c++': CstyleExtractor,
     'c#': CstyleExtractor,
+    'php': CstyleExtractor,
     'py': PythonExtractor
 }
 
@@ -51,19 +53,23 @@ languageSuffixes = {
 
     'python': ['py'],
     'java': ['java'],
+    'php': ['php'],
     'py': ['py'],
     'js': ['js'],
     'c': ['c', 'h'],
-    'cpp': ['c++', 'cpp', 'cxx', 'h'],
+    'cpp': ['c++', 'cpp', 'cxx', 'h', 'cc'],
+    'c++': ['c++', 'cpp', 'cxx', 'h', 'cc'],
     }
 
 defaultSymbols = {
     'python': '!',
     'py': '!',
+    'php': '!',
     'java': '!',
     'js': '!',
-    'c': '##',
-    'cpp': '##',
+    'c': '!',
+    'cpp': '!',
+    'c++': '!',
     }
 
 # Main Script
