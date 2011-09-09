@@ -85,7 +85,7 @@ openCommand = 'gnome-open'
 # Determine the 'open' command to open a new browser window
 
 if os.name == 'mac':
-    openCommand = 'mac'
+    openCommand = 'open'
 elif os.name == 'nt':
     openCommand = 'start'
 
