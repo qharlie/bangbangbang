@@ -12,22 +12,22 @@ if [ $ret -ne 0 ] || ! [ -x "$python" ]; then
   exit $ret
 fi
 
+INSTALL_PATH=$HOME/.bang
+LINK_PATH=/usr/bin/bang
+CPATH=bang
+CREATE_LINK=1
 
+if [ ! -w /usr/bin ]; then
+    CREATE_LINK=0    
+    CPATH="$INSTALL_PATH/bang.py"
+    echo "You don't have permissions to make a link to /usr/bin/bang, you can either type the full path to $INSTALL_PATH/bang.py"
+    echo "or you can stop and reinstall with sudo.  Should I procede and just skip making the link (y\N) ?"
+    read answer
 
-#Check to see if the have write permissions
-
-if [ ! -e /opt/ ]; then
-
-    mkdir /opt/    
-    if [ ! -w /opt/  ]; then
-	echo "You need write permissions for /opt/ and /usr/bin to install BANG, try sudo'ing ?"
-	exit 1
+    if [ "$answer" != "y" ]; then
+	exit 0
     fi
-fi
 
-if [ ! -w /usr/bin/  ]; then
-    echo "You need write permissions for /opt/ and /usr/bin to install BANG, try sudo'ing ?"
-    exit 1
 fi
 
 # set the temp dir
@@ -43,8 +43,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-BACK="$PWD"
-
 tar="${TAR}"
 if [ -z "$tar" ]; then
   tar=tar
@@ -52,20 +50,24 @@ fi
 
 
 #Remove previous versions !charlie ^10
-if [ -e /opt/bang/ ]; then
-    rm -rf /opt/bang/
+if [ -e $INSTALL_PATH ]; then
+    rm -rf $INSTALL_PATH
 fi
 
-if [ -h /usr/bin/bang ]; then
-    rm /usr/bin/bang
-fi
-
+mkdir $INSTALL_PATH
 
 echo "Downloading the latest bang script into $TMP"
-curl -s http://www.thecodebase.com/latest.tgz > $TMP/latest.tgz
-echo 'Unzipping the tarball and moving to /opt/'
-cd $TMP && $tar xzf latest.tgz && mv script/ /opt/bang/
-echo 'Creating a link to /usr/bin/bang'
-ln -s /opt/bang/bang.py /usr/bin/bang 
-echo ''
-echo 'BANG has been installed!  Use bang -h to get started, or try bang -text -lpy /opt/bang/ to see it in action. '
+curl -s http://www.thecodebase.com/bang/latest.tgz > $TMP/latest.tgz
+echo "Unzipping the tarball and moving to $INSTALL_PATH"
+cd $TMP && $tar xzf latest.tgz && mv script/* $INSTALL_PATH
+if [ $CREATE_LINK -eq 1  ]; then
+    echo "Creating a link to $LINK_PATH"
+    if [ -h $LINK_PATH ]; then
+	rm $LINK_PATH
+    fi
+    ln -s $INSTALL_PATH/bang.py $LINK_PATH
+fi
+
+#Clean up 
+rm -rf "$TMP"
+echo "BANG has been installed!  Use '$CPATH -h' to get started, or try '$CPATH $INSTALL_PATH' to see it in action. "

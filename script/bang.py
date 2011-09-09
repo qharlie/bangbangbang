@@ -19,7 +19,7 @@ def writeConfigFile(symbol, language, dirs, cwd):
         'dirs' : dirs,
         'projectName' : os.path.basename(cwd)
     }
-    file(cwd + '/.bang', 'write').write(json.dumps(config))
+    file(cwd + '/.bangconfig', 'write').write(json.dumps(config))
 
 
 
@@ -89,8 +89,8 @@ globalConfigs = {}
 
 # Now we read the config files, a global one, and a project based one
 cwd = os.getcwd()
-globalConfigFile = os.getenv("HOME") + "/.bang";
-projectConfigFile = cwd + "/.bang";
+globalConfigFile = os.getenv("HOME") + "/.bangconfig";
+projectConfigFile = cwd + "/.bangconfig";
 
 if os.path.exists(projectConfigFile):
     globalConfigs = readConfigFile(projectConfigFile)
@@ -107,9 +107,9 @@ parser.add_argument('dirs', metavar='directory', nargs='+',
 # Add an -x exclude option to exclude things like jquery, ext, anything minified.  Use globs ? !r2 ^9
 
 parser.add_argument('-l', dest='language', action='store',
-                    help='The language type to parse, options are [php,py[thon],pe[rl],ja[va],c[#,++],js')
+                    help='The language type to parse, options are [php,py[thon],java,c[#,++],js')
 parser.add_argument('-i', dest='includeLongLines', action='store_const', const='True',
-                    help='Include files whose length is > 1000, this is recommended, js users will see a lot of false hits in minified code')
+                    help='Include files whose length is > ' + str(config['longLine']) + ', this is not recommended')
 parser.add_argument('-v', dest='verbose', action='store_const', const='True',
                     help='Verbose mode')
 parser.add_argument('-q', dest='dontOpen', action='store_const', const='True',
