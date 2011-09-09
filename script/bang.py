@@ -109,7 +109,7 @@ parser.add_argument('dirs', metavar='directory', nargs='+',
 parser.add_argument('-l', dest='language', action='store',
                     help='The language type to parse, options are [php,py[thon],java,c[#,++],js')
 parser.add_argument('-i', dest='includeLongLines', action='store_const', const='True',
-                    help='Include files whose length is > ' + str(config['longLine']) + ', this is not recommended')
+                    help='Include files whose length is > 1000, this is recommended, js users will see a lot of false hits in minified code')
 parser.add_argument('-v', dest='verbose', action='store_const', const='True',
                     help='Verbose mode')
 parser.add_argument('-q', dest='dontOpen', action='store_const', const='True',
