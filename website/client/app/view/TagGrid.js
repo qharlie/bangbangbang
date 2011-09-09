@@ -80,7 +80,7 @@ Ext.define('Bang.view.TagGrid', {
             proxy: {
 
                 type: 'jsonp',
-                url: '/bangapi/report/getIssues',
+                url: 'bangapi/report/getIssues',
                 extraParams: { reportId: me.reportId, bangTag: me.bangTag },
                 reader: {
                     root: 'data',

@@ -57,7 +57,7 @@ fi
 mkdir $INSTALL_PATH
 
 echo "Downloading the latest bang script into $TMP"
-curl -s http://www.thecodebase.com/bang/latest.tgz > $TMP/latest.tgz
+curl -s http://www.thecodebase.com/latest.tgz > $TMP/latest.tgz
 echo "Unzipping the tarball and moving to $INSTALL_PATH"
 cd $TMP && $tar xzf latest.tgz && mv script/* $INSTALL_PATH
 if [ $CREATE_LINK -eq 1  ]; then
