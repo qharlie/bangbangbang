@@ -20,10 +20,8 @@ CREATE_LINK=1
 if [ ! -w /usr/bin ]; then
     CREATE_LINK=0    
     CPATH="$INSTALL_PATH/bang.py"
-    echo "You don't have permissions to make a link to /usr/bin/bang, you can either type the full path to $INSTALL_PATH/bang.py"
-    echo "or you can stop and reinstall with sudo.  Should I procede and just skip making the link (y\N) ?"
+    echo "You don't have permissions to make a link to /usr/bin/bang, you can either type the full path to $INSTALL_PATH/bang.py or you can stop and reinstall with sudo.  Should I procede and just skip making the link (y\N) ?"
     read answer
-
     if [ "$answer" != "y" ]; then
 	exit 0
     fi
@@ -71,3 +69,4 @@ fi
 #Clean up 
 rm -rf "$TMP"
 echo "BANG has been installed!  Use '$CPATH -h' to get started, or try '$CPATH $INSTALL_PATH' to see it in action. "
+echo "To Uninstall, simply rm -rf $INSTALL_PATH"
