@@ -81,10 +81,10 @@ language = 'py'
 symbol = '!'
 files = []
 globalConfigs = {} 
-openCommand = 'gnome-open'
+openCommand = 'xdg-open'
 # Determine the 'open' command to open a new browser window
 
-if os.name == 'mac':
+if sys.platform == 'darwin':
     openCommand = 'open'
 elif os.name == 'nt':
     openCommand = 'start'

@@ -68,5 +68,5 @@ fi
 
 #Clean up 
 rm -rf "$TMP"
-echo "BANG has been installed!  Use '$CPATH -h' to get started, or try '$CPATH $INSTALL_PATH' to see it in action. "
 echo "To Uninstall, simply rm -rf $INSTALL_PATH"
+echo "BANG has been installed!  Use '$CPATH -h' to get started, or try '$CPATH $INSTALL_PATH' to see it in action. "
