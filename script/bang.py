@@ -187,7 +187,7 @@ else:
     if not args.dontOpen:
         #determine open command !r1 ^9
         #rewrite this to use non deprecated peopoen !r2
-        os.popen(openCommand + url)
+        os.popen(openCommand + ' ' + url)
 
 
 
