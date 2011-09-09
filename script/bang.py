@@ -74,10 +74,6 @@ defaultSymbols = {
 
 # Main Script
 
-#Check to see if they have a ~/bang file
-
-
-
 
 import argparse, os
 
@@ -85,6 +81,14 @@ language = 'py'
 symbol = '!'
 files = []
 globalConfigs = {} 
+openCommand = 'gnome-open'
+# Determine the 'open' command to open a new browser window
+
+if os.name == 'mac':
+    openCommand = 'mac'
+elif os.name == 'nt':
+    openCommand = 'start'
+
 
 
 # Now we read the config files, a global one, and a project based one
@@ -183,7 +187,7 @@ else:
     if not args.dontOpen:
         #determine open command !r1 ^9
         #rewrite this to use non deprecated peopoen !r2
-        os.popen('gnome-open ' + url)
+        os.popen(openCommand + url)
 
 
 
