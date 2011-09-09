@@ -86,8 +86,8 @@ openCommand = 'xdg-open'
 
 if sys.platform == 'darwin':
     openCommand = 'open'
-elif os.name == 'nt':
-    openCommand = 'start'
+elif sys.platform == 'cygwin':
+    openCommand = 'cygstart'
 
 
 
