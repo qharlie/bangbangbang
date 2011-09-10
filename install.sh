@@ -1,5 +1,5 @@
 
-# make sure that node exists
+# make sure that python exists
 python=`which python`
 ret=$?
 if [ $ret -ne 0 ] || ! [ -x "$python" ]; then
