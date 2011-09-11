@@ -39,6 +39,19 @@
             margin: 1em 0 0;
             padding: 0
         }
+        .bangTag
+        {
+            font-weight: bold;
+            color: #ff0000;
+
+        }
+
+        .sh_ide-eclipse .sh_sourceCode .bangTag  .sh_comment
+        {
+            font-weight: bold;
+            color: #ff0000;
+
+        }
 
         li {
             list-style-position: inside
@@ -107,12 +120,19 @@
 
 <h1>bang</h1>
 
-BANG is an inline ticketing system ( insipired by twitter's <a href="http://support.twitter.com/entries/49309-what-are-hashtags-symbols" target="_blank">hash tags</a> ) that allows you to <span style="color:  purple;font-weight: bold;">!tag</span> your
-comments and assign them a <span style="color:  #4b0082;font-weight: bold;">^priority</span>, then displays them 
-in a report, turning your comments into an easy and efficient way to track what needs to be done.
-<br/>
 <p>
-    BANG requires only a python script that you install with a simple shell script.  You do not need to sign-up, login, or give us your email.  Simply type "bang my_project/", and you get a ticket list that looks similar to <a href="report.html?reportId=4e6a63c9575c35fb72000002" target="_blank">this actual report</a>.
+    BANG is a tool that lets you create tickets without ever leaving your code. Using the twitter-style tagging system, 
+    you can simply add a <span class="bangTag">!tag</span>  and a <span class="bangTag">^priority</span>  to comments, and BANG collects these for you in a purty interface.
+</p>
+
+<p>
+    BANG makes a perfect to-do list for individuals or small projects, and also works well as a simple ticketing system
+    for
+    small companies.
+</p>
+
+<p style="text-decoration: underline;">
+BANG requires no signing up or logging in, simply run it from the command line, and it will open your report for you.
 </p>
 
 <p style="text-decoration: underline;">
@@ -126,7 +146,7 @@ in a report, turning your comments into an easy and efficient way to track what 
 <br/>
 
 <p>
-    <span style="text-decoration: underline;">Example Usage</span>:
+    <span style="text-decoration: underline;">Choose your language</span>:
     <select onchange="showExample(this.value);return false;">
         <option value="cpp">C/C++</option>
         <option value="java">Java</option>
@@ -140,7 +160,7 @@ in a report, turning your comments into an easy and efficient way to track what 
     <br/>
     you@yourcomputer:~$ <span style="font-weight: bold;">bang -ljs js_folder/</span>
     <pre class="js">
-// This selector is awful, fix it !charlie !ui ^5
+// This selector is awful, fix it <span class="bangTag">!charlie !ui ^5</span>
 function showExample(id) {
     $('div').hide();
     $('#example-' + id).show();
@@ -152,7 +172,7 @@ function showExample(id) {
     <br/>
     you@yourcomputer:~$ <span style="font-weight: bold;">bang -ljava jaguar/src/</span>
     <pre class="java">
-// Change to use GUIT style !gal ^7
+// Change to use GUIT style <span class="bangTag">!gal ^7</span>
 import com.guit.client.binder.contributor.RunAsync;
 import com.guit.client.place.Place;
 import com.jwavro.jaguar.client.model.Building;
@@ -178,7 +198,7 @@ public class BuildingList extends BuildingListBase implements Place &lt;Integer&
     you@yourcomputer:~$ <span style="font-weight: bold;">bang -lpy python_project/</span>
     <pre class="py">
 
-#Fix the tagList not being sorted correctly !r1 ^7
+#Fix the tagList not being sorted correctly <span class="bangTag"> !r1 ^7</span>
 
 for k, v in categories.iteritems():
     print k, '\n\t'
@@ -194,7 +214,7 @@ for k, v in categories.iteritems():
 <pre class="cpp">
 
 
-// Change the Arguments to use the new Arguments2 class !eventually ^0
+// Change the Arguments to use the new Arguments2 class <span class="bangTag">!eventually</span>
 static Handle &lt;Value&gt; Pipe(const Arguments& args) {
   HandleScope scope;
   int fds[2];
@@ -216,7 +236,7 @@ static Handle &lt;Value&gt; Pipe(const Arguments& args) {
     you@yourcomputer:~$ <span style="font-weight: bold;">bang -lphp php_project/</span>
 <pre class="php">
 
-//Make a config file for the FILE_NAME and official tweet names !r2 ^3
+//Make a config file for the FILE_NAME and official tweet names <span class="bangTag">!r2</span>
 
 require_once "SeverityStatus.enum.php";
 require_once "TrainStatus.class.php";
