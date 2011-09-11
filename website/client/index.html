@@ -64,7 +64,7 @@
     <link rel="stylesheet" type="text/css" href="resources/css/jquery.snippet.min.css">
     <script src="resources/js/jquery.js"></script>
     <script src="resources/js/jquery.snippet.min.js"></script>
-    <script>
+    <script type="text/javascript">
 
         $(document).ready(function() {
             $("pre.js").snippet("javascript", { style: 'ide-eclipse'});
@@ -87,14 +87,30 @@
         }
 
     </script>
+    <script type="text/javascript">
 
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18516187-3']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
 </head>
 
 <h1>bang</h1>
 
 BANG is an inline ticketing system that allows you to <span style="color:  purple;font-weight: bold;">!tag</span> your
 comments and assign them a <span style="color:  #4b0082;font-weight: bold;">^priority</span>, then displays them with a
-<a href="resources/images/screen-text.png">text report</a> or a <a href="report.html?reportId=4e6a63c9575c35fb72000002">web report</a> for easily keeping
+<a href="resources/images/screen-text.png">text report</a> or a <a href="report.html?reportId=4e6a63c9575c35fb72000002">web
+    report</a> for easily keeping
 track of TODO's and the like.
 
 <p style="text-decoration: underline;">
@@ -195,7 +211,7 @@ static Handle &lt;Value&gt; Pipe(const Arguments& args) {
 
 <div id="example-php">
     <br/>
-     you@yourcomputer:~$ <span style="font-weight: bold;">bang -lphp php_project/</span>
+    you@yourcomputer:~$ <span style="font-weight: bold;">bang -lphp php_project/</span>
 <pre class="php">
 
 //Make a config file for the FILE_NAME and official tweet names !r2 ^3

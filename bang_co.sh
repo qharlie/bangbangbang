@@ -4,7 +4,7 @@ echo $node
 kill -9 $node
 # remove formhog
 rm -rf bangbang
-#checkout
+#checkout 
 git clone git@github.com:qbert65536/bangbang.git
 rm -rf bang
 mv bangbang/website bang

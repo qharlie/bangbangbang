@@ -120,7 +120,7 @@ Ext.define('Bang.view.TagGrid', {
                         
                     }
 
-                }
+                } 
 //                beforeload: function (ds) {
 //
 //                    ds.proxy.extraParams = {
