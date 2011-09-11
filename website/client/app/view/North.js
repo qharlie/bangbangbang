@@ -20,7 +20,7 @@ Ext.define("Bang.view.North", {
     html:
         '<img src="resources/images/logo.png" alt="" style="margin-top: .2em;">' +
             '<span align="center" style="font-family: Courier;font-size: 2em;font-weight: bold;">BANG.' +
-            ' <span style="font-size: .5em;font-weight: normal;"> inline ticketing for lazy programmers' +
+            ' <span style="font-size: .5em;font-weight: normal;">an easy way to track what needs to be done.' +
             '</span>' +
             '</span>'
 });

@@ -1,4 +1,4 @@
-import os, fileinput, re, collections, tag
+import os, fileinput, re, tag
 
 from config import config 
 
@@ -7,7 +7,7 @@ class Extractor:
     def __init__(self, files, symbol, singleLinePattern, mutiLinePattern, includeLongLines):
 
         self.includeLongLines = includeLongLines
-        self.cat = collections.defaultdict(list)
+        self.cat = {};
         self.files = files
         self.symbol = symbol
         self.singleLinePattern = singleLinePattern
@@ -25,7 +25,11 @@ class Extractor:
             if len(comment) < config['longLine']:
                 matched = re.findall('(' + self.symbol + '\w+)', comment);
                 for match in matched:
-                    self.cat[match].append(tag.Tag( source, i, match, comment, fileContents))
+                    if match in self.cat:
+                        self.cat[match].append(tag.Tag( source, i, match, comment, fileContents))
+                    else:
+                        self.cat[match] = []
+                        self.cat[match].append(tag.Tag( source, i, match, comment, fileContents))
 
         # Still trying to figure out how to do this with a regex and get a line number
         for line in fileinput.FileInput(source):
@@ -40,7 +44,11 @@ class Extractor:
                         priorityMatch = re.search(self.priorityPattern,comment);
                         if priorityMatch:
                             priority = priorityMatch.group(1)
-                        self.cat[match].append(tag.Tag( source, i, match, comment, fileContents, priority))
+                        if match in self.cat:
+                            self.cat[match].append(tag.Tag( source, i, match, comment, fileContents, priority))
+                        else:
+                            self.cat[match] = []
+                            self.cat[match].append(tag.Tag( source, i, match, comment, fileContents, priority))
 
 
 

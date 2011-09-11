@@ -5,9 +5,9 @@
 # Write an install script, test it on mac.  !r1 ^5
 # Test for c/c++/java/ruby !r2
 
-import os, json, uploader, sys
+import os, uploader, sys
 
-
+import simplejson as json
 from pythonExtractor import PythonExtractor
 from cExtractor import CstyleExtractor
 from tag import Tag
