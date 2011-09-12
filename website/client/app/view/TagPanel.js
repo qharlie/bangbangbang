@@ -35,7 +35,7 @@ Ext.define('Bang.view.TagPanel', {
 
                     me.add(
                         {
-                            title: '<img src="resources/images/tag.png" alt=""> <span style="font-family: Courier;font-size: 1.2em;font-weight: bold;">' + tagName + '</span>',
+                            title: '<img src="resources/images/tag.png" alt="" style="float: left;"> <span style="font-family: Courier;font-size: 1.2em;font-weight: bold;">' + tagName + '</span>',
                             xtype: 'tagGrid',
                             reportId: reportId,
                             bangTag: tagName
