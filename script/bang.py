@@ -151,7 +151,10 @@ if args.verbose: sys.stdout.write("\nCalling bang with language = '" + language 
 if args.verbose: sys.stdout.write("Using suffixes " + str(languageSuffixes[language]) + "\n")
 
 for d in args.dirs:
-    files.extend(listFiles(d, languageSuffixes[language]))
+    if os.path.isfile(d):
+        files.append(d)
+    else:
+        files.extend(listFiles(d, languageSuffixes[language]))
 
 if args.verbose: sys.stdout.write("Found " + str(len(files)) + " files for parsing\n")
 if not len(files):
