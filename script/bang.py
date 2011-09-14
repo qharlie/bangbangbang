@@ -1,9 +1,7 @@
 #!/usr/bin/python
 
-# Send the folder name as the project name for now, just to identify it !r1
 # Have someone who knows python rewrite this !eventually
-# Write an install script, test it on mac.  !r1 ^5
-# Test for c/c++/java/ruby !r2
+
 
 import os, uploader, sys
 
@@ -37,7 +35,7 @@ def listFiles(rootDir, suffixes):
                     fileList.append(os.path.join(root, file))
     return fileList;
 
-
+# Add a ruby extractor !r2
 extracters = {
     'js': CstyleExtractor,
     'java': CstyleExtractor,
@@ -188,8 +186,7 @@ else:
     url = uploader.uploadReport(report)
     print url
     if not args.dontOpen:
-        #determine open command !r1 ^9
-        #rewrite this to use non deprecated peopoen !r2
+        #rewrite this to use non deprecated popoen !r2
         os.popen(openCommand + ' ' + url)
 
 

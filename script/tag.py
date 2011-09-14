@@ -7,7 +7,7 @@ class Tag:
         self.lineNumber = lineNumber
         self.tag = tag
         self.comment = comment
-# This is causing the server to hang on large committs, fix this !eventually
+# This is causing the server to hang on large files !eventually
 #        self.fileContents = fileContents
         self.fileContents = ''
         self.priority = priority
